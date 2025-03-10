@@ -9,8 +9,8 @@ COPY etc etc
 RUN dnf remove gnome-tour gnome-abrt gnome-calculator gnome-calendar gnome-maps gnome-weather \
     rhythmbox gnome-contacts totem gnome-logs gnome-photos gnome-clocks gedit gnome-system-monitor \
     gnome-user-docs gnome-screenshot gnome-remote-desktop && \
-    dnf install -y steam gamescope goverlay gamemode  git bash-completion zram-generator podman-bootc \
-    sway swaync waybar swayidle swaybg wofi gnome-polkit && \
+    dnf install -y steam gamescope goverlay gamemode  git bash-completion zram-generator podman-machine \
+    sway swaync waybar swayidle swaybg wofi polkit && \
     dnf clean all && \
     flatpak install --system app.zen_browser.zen && \
     flatpak install --user com.discordapp.Discord dev.zed.Zed  && \
