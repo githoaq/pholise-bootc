@@ -20,10 +20,11 @@ RUN dnf install -y steam gamescope goverlay gamemode  git bash-completion zram-g
     sway swaync waybar swayidle swaybg wofi polkit && \
     dnf clean all
 
-RUN flatpak install -y --system app.zen_browser.zen && \
+# Setup flatpak
+RUN dnf install flatpak && flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && \
+    flatpak install -y --system app.zen_browser.zen && \
     flatpak install -y --user com.discordapp.Discord dev.zed.Zed  && \
-
-RUN bootc container lint
+    bootc container lint 
 
 
 #COPY [unpackaged application]
