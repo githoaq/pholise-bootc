@@ -7,12 +7,12 @@ COPY etc etc
 #COPY usr usr
 
 # Setup repos
-RUN dnf install \
+RUN dnf install -y \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Install pkgs
-RUN dnf remove gnome-tour gnome-abrt gnome-calculator gnome-calendar gnome-maps gnome-weather \
+RUN dnf remove -y gnome-tour gnome-abrt gnome-calculator gnome-calendar gnome-maps gnome-weather \
     rhythmbox gnome-contacts totem gnome-logs gnome-photos gnome-clocks gedit gnome-system-monitor \
     gnome-user-docs gnome-screenshot gnome-remote-desktop
 
@@ -20,8 +20,8 @@ RUN dnf install -y steam gamescope goverlay gamemode  git bash-completion zram-g
     sway swaync waybar swayidle swaybg wofi polkit && \
     dnf clean all
 
-RUN flatpak install --system app.zen_browser.zen && \
-    flatpak install --user com.discordapp.Discord dev.zed.Zed  && \
+RUN flatpak install -y --system app.zen_browser.zen && \
+    flatpak install -y --user com.discordapp.Discord dev.zed.Zed  && \
 
 RUN bootc container lint
 
