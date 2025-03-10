@@ -17,11 +17,11 @@ RUN dnf remove -y gnome-tour gnome-abrt gnome-calculator gnome-calendar gnome-ma
     gnome-user-docs gnome-screenshot gnome-remote-desktop
 
 RUN dnf install -y steam gamescope goverlay gamemode  git bash-completion zram-generator podman-machine \
-    sway swaync waybar swayidle swaybg wofi polkit && \
+    sway swaync waybar swayidle swaybg wofi polkit flatpak && \
     dnf clean all
 
 # Setup flatpak
-RUN dnf install flatpak && flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && \
+RUN flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && \
     flatpak install -y --system app.zen_browser.zen && \
     flatpak install -y --user com.discordapp.Discord dev.zed.Zed  && \
     bootc container lint 
