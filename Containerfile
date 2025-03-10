@@ -6,6 +6,12 @@ FROM quay.io/fedora/fedora-bootc:41
 COPY etc etc
 #COPY usr usr
 
+# Setup repos
+RUN dnf install \
+  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
+# Install pkgs
 RUN dnf remove gnome-tour gnome-abrt gnome-calculator gnome-calendar gnome-maps gnome-weather \
     rhythmbox gnome-contacts totem gnome-logs gnome-photos gnome-clocks gedit gnome-system-monitor \
     gnome-user-docs gnome-screenshot gnome-remote-desktop
