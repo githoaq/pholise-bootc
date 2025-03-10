@@ -18,6 +18,11 @@ jobs:
     env:
       IMAGE_NAME: custom-bootc
       REGISTRY: ghcr.io/pholise
+    
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
 
     steps:
       # Based on https://github.com/orgs/community/discussions/25678
