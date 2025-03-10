@@ -17,7 +17,7 @@ RUN dnf remove -y gnome-tour gnome-abrt gnome-calculator gnome-calendar gnome-ma
     gnome-user-docs gnome-screenshot gnome-remote-desktop
 
 RUN dnf install -y steam gamescope goverlay gamemode  git bash-completion zram-generator podman-machine \
-    @xfce-desktop-environment sway swaync waybar swayidle swaybg wofi xfce-polkit flatpak && \
+    sway swaync waybar swayidle swaybg wofi xfce-polkit flatpak && \
     dnf clean all
 
 # Setup flatpak
