@@ -13,13 +13,14 @@ ENV USER_FLATPAK="com.discordapp.Discord dev.zed.Zed"
 
 COPY etc etc
 
-# Setup repos
+# Setup repos (nonfree + flatpak)
 RUN dnf install -y \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm && \
+  flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Setup applications
-RUN dnf install --skip-unavailable -y $INSTALL_RPM && \
+RUN dnf group install --skip-unavailable -y $INSTALL_RPM && \
     dnf remove -y $REMOVE_RPM && \
     dnf clean all && \
     flatpak install --system $SYS_FLATPAK && \
