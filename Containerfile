@@ -19,7 +19,7 @@ RUN dnf install -y \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Setup applications
-RUN dnf install -y $INSTALL_RPM && \
+RUN dnf install --skip-unavailable -y $INSTALL_RPM && \
     dnf remove -y $REMOVE_RPM && \
     dnf clean all && \
     flatpak install --system $SYS_FLATPAK && \
