@@ -25,8 +25,7 @@ RUN dnf install -y \
 RUN dnf group install --skip-unavailable -y $INSTALL_RPM && \
     dnf remove -y $REMOVE_RPM && \
     dnf clean all && \
-    flatpak install --system $SYS_FLATPAK && \
-    flatpak install --user $USER_FLATPAK && \
+    flatpak install -y --system $SYS_FLATPAK --user $USER_FLATPAK && \
     bootc container lint
 
 #COPY [unpackaged application]
