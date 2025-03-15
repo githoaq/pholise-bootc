@@ -1,5 +1,9 @@
 FROM quay.io/fedora/fedora-bootc:41
 
+ARG NONFREE_REPO="\
+  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+
 ENV REMOVE_RPM="gnome-tour gnome-abrt gnome-calculator gnome-calendar gnome-maps gnome-weather \
     rhythmbox gnome-contacts totem gnome-logs gnome-photos gnome-clocks gedit gnome-system-monitor \
     gnome-user-docs gnome-screenshot gnome-remote-desktop"
@@ -13,7 +17,7 @@ ENV USER_FLATPAK="com.discordapp.Discord dev.zed.Zed"
 
 COPY etc etc
 
-RUN dnf install -y  $INSTALL_RPM && \
+RUN dnf install -y  $NONFREE_REPO $INSTALL_RPM && \
     dnf remove -y $REMOVE_RPM && \
     dnf clean all && \
     flatpak install --system $SYS_FLATPAK && \
