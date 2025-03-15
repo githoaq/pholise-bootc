@@ -14,7 +14,7 @@ ENV USER_FLATPAK="com.discordapp.Discord dev.zed.Zed"
 COPY etc etc
 
 # Setup flatpak
-RUN dnf install flatpak && flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+RUN dnf install -y flatpak && flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Setup nonfree repos
 RUN dnf install -y \
