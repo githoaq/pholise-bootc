@@ -1,30 +1,24 @@
 FROM quay.io/fedora/fedora-bootc:41
-# RUN dnf install -y [system agents] [dependencies] && dnf clean all
-# COPY [unpackaged application]
-# COPY [configuration files]
-# RUN [config scripts]
-COPY etc etc
-#COPY usr usr
 
-# Setup repos
-RUN dnf install -y \
-  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-
-# Install pkgs
-RUN dnf remove -y gnome-tour gnome-abrt gnome-calculator gnome-calendar gnome-maps gnome-weather \
+ENV REMOVE_RPM="gnome-tour gnome-abrt gnome-calculator gnome-calendar gnome-maps gnome-weather \
     rhythmbox gnome-contacts totem gnome-logs gnome-photos gnome-clocks gedit gnome-system-monitor \
-    gnome-user-docs gnome-screenshot gnome-remote-desktop
+    gnome-user-docs gnome-screenshot gnome-remote-desktop"
 
-RUN dnf install -y steam gamescope goverlay gamemode  git bash-completion zram-generator podman-machine \
-    sway swaync waybar swayidle swaybg wofi xfce-polkit flatpak && \
-    dnf clean all
+ENV INSTALL_RPM="steam gamescope goverlay gamemode  git bash-completion zram-generator podman-bootc \
+    sway swaync waybar swayidle swaybg wofi @GNOME gnome-polkit"
 
-# Setup flatpak
-RUN flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo && \
-    flatpak install -y --system app.zen_browser.zen com.discordapp.Discord dev.zed.Zed && \
-    #flatpak install -y --user com.discordapp.Discord dev.zed.Zed  && \
-    bootc container lint 
+ENV SYS_FLATPAK="app.zen_browser.zen"
+
+ENV USER_FLATPAK="com.discordapp.Discord dev.zed.Zed"
+
+COPY etc etc
+
+RUN dnf install -y  $INSTALL_RPM && \
+    dnf remove -y $REMOVE_RPM && \
+    dnf clean all && \
+    flatpak install --system $SYS_FLATPAK && \
+    flatpak install --user $USER_FLATPAK && \
+    bootc container lint
 
 
 #COPY [unpackaged application]
