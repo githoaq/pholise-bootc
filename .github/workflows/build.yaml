@@ -19,10 +19,10 @@ jobs:
       IMAGE_NAME: pholise-bootc
       REGISTRY: "ghcr.io/${{ github.repository_owner }}"
     
-    # permissions:
-    #   contents: read
-    #   packages: write
-    #   id-token: write
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
 
     steps:
       # Based on https://github.com/orgs/community/discussions/25678
