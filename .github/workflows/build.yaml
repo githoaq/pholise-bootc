@@ -16,13 +16,13 @@ jobs:
     #change ubuntu-latest to runner if using the included gitea configs
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: custom-bootc
-      REGISTRY: ghcr.io/pholise
+      IMAGE_NAME: pholise-bootc
+      REGISTRY: "ghcr.io/${{ github.repository_owner }}"
     
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
+    # permissions:
+    #   contents: read
+    #   packages: write
+    #   id-token: write
 
     steps:
       # Based on https://github.com/orgs/community/discussions/25678
