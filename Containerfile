@@ -5,7 +5,7 @@ ENV REMOVE_RPM="gnome-tour gnome-abrt gnome-calculator gnome-calendar gnome-maps
     gnome-user-docs gnome-screenshot gnome-remote-desktop"
 
 ENV INSTALL_RPM="glances steam gamescope goverlay gamemode  git bash-completion zram-generator podman-bootc \
-    sway swaync waybar swayidle swaybg wofi @GNOME gnome-polkit"
+    sway swaync waybar swayidle swaybg wofi @gnome-desktop gnome-polkit"
 
 ENV SYS_FLATPAK="app.zen_browser.zen"
 
@@ -18,8 +18,8 @@ RUN dnf install -y flatpak && flatpak remote-add --if-not-exists flathub https:/
 
 # Setup nonfree repos
 RUN dnf install -y \
-  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+    https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Setup applications
 RUN dnf install --skip-unavailable -y $INSTALL_RPM && \
